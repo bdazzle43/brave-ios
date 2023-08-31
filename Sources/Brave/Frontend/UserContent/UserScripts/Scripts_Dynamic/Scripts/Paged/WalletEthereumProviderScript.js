@@ -30,6 +30,9 @@ if (window.isSecureContext) {
     }));
   }
   
+  var EventEmitter = require('events');
+  var BraveWeb3ProviderEventEmitter = new EventEmitter();
+  
   const provider = {
     value: {
       chainId: undefined,
@@ -92,6 +95,10 @@ if (window.isSecureContext) {
       isUnlocked: $(function() /* -> Promise<boolean> */ {
         return post('isUnlocked', {})
       }),
+      on: BraveWeb3ProviderEventEmitter.on,
+      emit: BraveWeb3ProviderEventEmitter.emit,
+      removeListener: BraveWeb3ProviderEventEmitter.removeListener,
+      removeAllListeners: BraveWeb3ProviderEventEmitter.removeAllListeners
     }
   };
   $Object.defineProperty(window, 'ethereum', provider);
